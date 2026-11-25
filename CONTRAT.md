@@ -23,7 +23,7 @@ Chaque route de recommandation renvoie une courte liste :
 |---|---|---|
 | `GET /reco/popular` | `k` | Populaire sur l'île |
 | `GET /reco/usual` | `villager_id`, `k` | Vos produits habituels |
-| `POST /events` | liste d'événements | Le site envoie ce que fait le villageois |
+| `POST /events` | liste d'événements [villager_idx : ... ]  | Le site envoie ce que fait le villageois |
 | `DELETE /villagers/{id}` | | Efface ses données chez nous (RGPD) |
 
 Le paramètre k, c'est le nombre de produits qui seront reçues en réponse.
