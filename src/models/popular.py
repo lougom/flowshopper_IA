@@ -38,7 +38,7 @@ class Model:
         return [
             {
                 "product_id": row.product_id,
-                "score": float(row.total),
+                "score": int(row.total),
                 "reason": f"Parmi les plus achetés sur l'île : {row['name']}",
             }
             for _, row in top.iterrows()

@@ -7,8 +7,14 @@ import pandas as pd
 
 from paths import DATA_DIR
 
-# from src.models.popular import Model   # à décommenter quand popular.py existe
+from src.models.popular import Model   # à décommenter quand popular.py existe
 
+def load_csv(path):
+    df = pd.read_csv(path, skipinitialspace=True)
+    df.columns = df.columns.str.strip()
+    text_cols = df.select_dtypes(exclude="number").columns
+    df[text_cols] = df[text_cols].apply(lambda c: c.str.strip())
+    return df
 
 def main():
     # 1. Voir ce qu'il y a dans data/
@@ -16,16 +22,14 @@ def main():
         print(csv_path.name)
 
     # 2. Charger les données (remplace par les vrais noms de fichiers)
-    history = pd.read_csv(DATA_DIR / "orders.csv")
-    catalog = pd.read_csv(DATA_DIR / "catalog.csv")
-    print(history.head())
-    print(catalog.head())
-
+    history = load_csv(DATA_DIR / "flowshopper_orders.csv")
+    catalog = load_csv(DATA_DIR / "flowshopper_catalog.csv")
+    
     # 3. Entraîner le modèle et demander un exemple (quand il existera)
-    # model = Model()
-    # model.fit(history, catalog)
-    # for s in model.recommend("V-0042", k=5):
-    #     print(s["product_id"], s["score"], s["reason"])
+    model = Model()
+    model.fit(history, catalog)
+    for s in model.recommend("V-0042", k=5):
+        print(s["product_id"], s["score"], s["reason"])
 
 
 if __name__ == "__main__":
