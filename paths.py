@@ -7,8 +7,8 @@ Ce fichier définit les chemins une seule fois. Les autres fichiers
 
 from pathlib import Path
 
-# Racine du repo : config.py est dans src/, donc on remonte d'un cran.
-ROOT_DIR = Path(__file__).resolve().parents[1]
+# Racine du repo : paths.py est dans reco/flowshopper_IA/, donc parents[2].
+ROOT_DIR = Path(__file__).resolve().parents[2]
 
 # Dossier contenant les CSV (catalogue et historique d'achats).
 DATA_DIR = ROOT_DIR / "data"
